@@ -16,8 +16,11 @@ jobs:
         run: |
           docker build -t react-native-community/react-native .
           docker run --rm --name rn-env react-native-community/react-native /bin/sh -c "npx envinfo"
-      - name: Checkout React Native
-        run: git clone https://github.com/facebook/react-native.git
+      - name: Checkout React Native v0.77.2
+        run: |
+          git clone https://github.com/facebook/react-native.git
+          cd react-native
+          git checkout v0.77.2
       - name: Build React Native
         run: |
           docker run --rm --ulimit nofile=10240 -v "$(pwd)/scripts/":/scripts -v "$(pwd)/react-native/":/react-native -w /react-native react-native-community/react-native /bin/sh -c "/scripts/test-react-native-setup.sh"
