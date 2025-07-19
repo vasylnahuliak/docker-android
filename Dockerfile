@@ -65,7 +65,8 @@ RUN curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n \
     && bash n $NODE_VERSION \
     && rm n \
     && npm install -g n \
-    && npm install -g yarn
+    && npm install -g yarn \
+    && npm install -g xcode-build-tools
 
 # Full reference at https://dl.google.com/android/repository/repository2-1.xml
 # download and unpack android
