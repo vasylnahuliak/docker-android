@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # set default build arguments
 # https://developer.android.com/studio#command-tools
-ARG SDK_VERSION=commandlinetools-linux-13092105_latest.zip
+ARG SDK_VERSION=commandlinetools-linux-11076708_latest.zip
 ARG ANDROID_BUILD_VERSION=36
 ARG ANDROID_TOOLS_VERSION=36.0.0
 ARG NDK_VERSION=27.1.12297006
