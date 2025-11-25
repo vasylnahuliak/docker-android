@@ -44,8 +44,6 @@ RUN apt update -qq && apt install -qq -y --no-install-recommends \
         python3 \
         python3-distutils \
         rsync \
-        ruby \
-        ruby-dev \
         tzdata \
         unzip \
         sudo \
@@ -57,8 +55,29 @@ RUN apt update -qq && apt install -qq -y --no-install-recommends \
         # Dev dependencies required by linters
         jq \
         shellcheck \
-    && gem install bundler \
+        # Ruby build dependencies
+        autoconf \
+        bison \
+        libssl-dev \
+        libyaml-dev \
+        libreadline-dev \
+        zlib1g-dev \
+        libncurses-dev \
+        libffi-dev \
+        libgdbm-dev \
+        libdb-dev \
     && rm -rf /var/lib/apt/lists/*;
+
+# Install rbenv and Ruby
+ENV RBENV_ROOT="/usr/local/rbenv"
+ENV PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
+
+RUN git clone https://github.com/rbenv/rbenv.git $RBENV_ROOT \
+    && git clone https://github.com/rbenv/ruby-build.git $RBENV_ROOT/plugins/ruby-build \
+    && $RBENV_ROOT/plugins/ruby-build/install.sh \
+    && rbenv install 3.3.10 \
+    && rbenv global 3.3.10 \
+    && gem install bundler
 
 # install nodejs using n
 RUN curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n \
