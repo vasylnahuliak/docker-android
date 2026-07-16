@@ -106,3 +106,12 @@ RUN curl -sS https://dl.google.com/android/repository/${SDK_VERSION} -o /tmp/sdk
 
 # Disable git safe directory check as this is causing GHA to fail on GH Runners
 RUN git config --global --add safe.directory '*'
+
+# ccache
+ENV CCACHE_DIR=/root/.ccache
+ENV CCACHE_MAXSIZE=10G
+ENV CCACHE_COMPRESS=1
+ENV CCACHE_COMPRESSLEVEL=6
+ENV CCACHE_SLOPPINESS=time_macros,include_file_mtime,include_file_ctime,pch_defines,system_headers
+ENV CMAKE_C_COMPILER_LAUNCHER=ccache
+ENV CMAKE_CXX_COMPILER_LAUNCHER=ccache
